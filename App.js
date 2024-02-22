@@ -1,20 +1,76 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import * as React from "react";
+import { StyleSheet, View } from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-export default function App() {
+import SparkleChat from "react-native-sparkle-ai-chat";
+
+const Root = () => {
+  const inset = useSafeAreaInsets();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      <View
+        style={[
+          styles.topBar,
+          {
+            height: inset.top,
+          },
+        ]}
+      />
+      <SparkleChat
+        platform={"openai"}
+        apiKey={"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"}
+        instruction={
+          "Coffiaa AI Assistant is a virtual assistant that can help you about varies coffees that offers in Caffiaa Cafe. Ask me anything!"
+        }
+        brand={{
+          name: "Coffiaa AI Assistant",
+          logo: "https://i.ibb.co/T2mwffj/friend.png",
+          primaryColor: "#FF5C5C",
+          inputContainerColor: "#161616",
+          headerColor: "#161616",
+          backgroundColor: "#000",
+          textColor: "#fff",
+          leftBubbleColor: "#1F1F1F",
+          rightBubbleColor: "#FF5C5C",
+        }}
+      />
+      <View
+        style={[
+          styles.bottomBar,
+          {
+            height: inset.bottom,
+          },
+        ]}
+      />
+    </>
   );
-}
+};
+
+const App = () => {
+  return (
+    <SafeAreaProvider>
+      <Root />
+    </SafeAreaProvider>
+  );
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#161616",
+    position: "relative",
+  },
+  topBar: {
+    backgroundColor: "#000",
+  },
+  bottomBar: {
+    backgroundColor: "#161616",
   },
 });
